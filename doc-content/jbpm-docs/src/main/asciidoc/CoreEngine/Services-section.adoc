@@ -870,7 +870,7 @@ When embedded in jbpm-console/kie-wb they utilized sistem.git VFS repository to 
 While that works fine, it comes with some drawbacks:
 
 * not available for custom systems that use services
-* requires complex setup in cluster - zookeeper and helix
+* requires complex setup in cluster
 
 With version 6.2 jbpm services come with deployment synchronizer that stores available deployments into database, including its deployment descriptor.
 At the same time it constantly monitors that table to keep it in sync with other installations that might be using the same data source.
