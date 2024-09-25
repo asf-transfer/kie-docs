@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} - Java ${{ matrix.java-version }} - Maven
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Java and Maven Setup
       uses: kiegroup/kie-ci/.ci/actions/maven@main
       with:
