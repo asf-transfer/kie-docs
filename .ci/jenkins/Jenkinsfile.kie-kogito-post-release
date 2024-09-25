@@ -94,6 +94,10 @@ pipeline {
             steps {
                 script {
                     dir("${docsRepo}/doc-content/kogito-docs") {
+                        if (githubscm.isTagExist('origin', "${getKogitoDocsVersion()}-kogito")) {
+                            githubscm.removeRemoteTag('origin', "${getKogitoDocsVersion()}-kogito", getGitAuthorCredsId())
+                        }
+                        githubscm.removeLocalTag("${getKogitoDocsVersion()}-kogito"))
                         githubscm.tagRepository("${getKogitoDocsVersion()}-kogito")
                     }
                 }
@@ -123,6 +127,9 @@ pipeline {
             }
         }
         stage('Upload kie-kogito-docs to filemgmt') {
+            when {
+                expression {!isSkipUpload()}
+            }
             steps {
                 sshagent(credentials: ['KogitoDocsUpload']) {
                     script {
@@ -133,15 +140,25 @@ pipeline {
                 }
             }
         }
-        stage('Bump up kie-kogito-docs to next SNAPSHOT'){
+        stage('Bump up kogito-docs to next SNAPSHOT'){
             steps{
                 dir("${docsRepo}/doc-content/kogito-docs") {
                     script{
                         maven.mvnVersionsSet(util.getNextVersion(getKogitoDocsVersion(), 'minor'))
-                        if ( isNewVersionRequired() ) {
-                            // bump up if the current kie-version on main branch is greater then the kie-version on main-kogito branch
-                            maven.mvnVersionsUpdateParentAndChildModules("${getKieVersion()}", true)
-                        }
+                        sh 'head -n30 pom.xml'
+                    }
+                }
+            }
+        }
+        stage('Bump up kie-version if required') {
+            when {
+                expression {isNewVersionRequired()}
+            }
+            steps {
+                script {
+                    dir("${docsRepo}") {
+                        // bump up if the current kie-version on main branch is greater then the kie-version on main-kogito branch
+                        maven.mvnVersionsUpdateParentAndChildModules("${getKieVersion()}", true)
                         sh 'head -n30 pom.xml'
                     }
                 }
@@ -215,6 +232,10 @@ void sendNotification(String body) {
 
 boolean isNewVersionRequired() {
     return params.BUMP_UP
+}
+
+boolean isSkipUpload() {
+    return params.SKIP_UPLOAD
 }
 
 String getGitAuthorCredsId() {
