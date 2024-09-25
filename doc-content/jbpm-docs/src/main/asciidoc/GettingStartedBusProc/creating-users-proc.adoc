@@ -26,5 +26,5 @@ In {CENTRAL}, you can use groups and roles to control permissions for a collecti
 . Click *Save*.
 . Click the *Users* tab, select `Bill` from the user list, and click *Edit* -> *Roles* -> *Add roles*.
 . Select `user`, and click *Add to selected roles*.
-. Click the *Groups* tab, click image:project-data/new_group.png[], select `kie-server`, and click *Add to selected groups*.
+. Click the *Groups* tab, click image:project-data/add_to_groups.png[], select `kie-server`, and click *Add to selected groups*.
 . Click *Save*.

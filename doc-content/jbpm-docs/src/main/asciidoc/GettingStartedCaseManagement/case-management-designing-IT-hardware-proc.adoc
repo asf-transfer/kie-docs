@@ -53,6 +53,29 @@ The following case file variables are custom data types:
 * *survey*: Survey [com.myspace.it_orders_new] (select this value)
 ====
 +
+.. Scroll down, expand *Process Data*, click image:getting-started/btn_plus.png[the plus sign icon] in the *Process Variables* section, and enter the following values under *Process Variables*:
++
+.Process variables
+[cols="1,2", options="header"]
+|===
+
+|Name
+|Data Type
+
+|CaseID
+|String
+
+|initiator
+|String
+
+|approved
+|Boolean
+|===
++
+.Completed process variables
+image::cases/proc-vars.png[screen capture of the process variables list]
+
++
 . Click *Save*.
 . Define the roles involved in the case.
 .. In the upper-right corner, click the *Properties* image:getting-started/diagram_properties.png[] icon.

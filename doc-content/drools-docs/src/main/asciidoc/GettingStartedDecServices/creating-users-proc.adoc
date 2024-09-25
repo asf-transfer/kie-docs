@@ -20,7 +20,7 @@ In {CENTRAL}, you can use groups and roles to control permissions for a collecti
 . Click image:project-data/new_group.png[new group], enter `broker`, and click *Next*.
 . Select `Bill` from the user list, and click *Add selected users*.
 . Click *Users*, select `Katy`, and click *Edit* -> *Roles* -> *Add roles*.
-. Select `manager`, click *Add to selected roles*, and click *Save*.
+. Select `manager` and `user`, click *Add to selected roles*, and click *Save*.
 . Click the *Groups* tab and click *Add to groups*.
 . Select `approver` and `kie-server`, and click *Add to selected groups*.
 . Click *Save*.
